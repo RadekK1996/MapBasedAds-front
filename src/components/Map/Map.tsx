@@ -1,13 +1,16 @@
 import React, {useContext, useEffect, useState} from "react";
+import {SingleAd} from "./SingleAd";
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import {SearchContext} from "../../contexts/search.context";
-import {SimpleAdEntity} from 'types';
-import {SingleAd} from "../SingleAd/SingleAd";
+import {SimpleAdEntity} from 'types'
+import {defaultIcon, hoverIcon} from "../../utils/fix-map-icon";
+import {LeafletMouseEvent} from "leaflet";
 
 
 import '../../utils/fix-map-icon';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
+
 
 
 export const Map = () => {
@@ -28,6 +31,15 @@ export const Map = () => {
         })();
     }, [search]);
 
+    const handleMouseOver = (e: LeafletMouseEvent) => {
+        e.target.setIcon(hoverIcon);
+    };
+
+    const handleMouseOut = (e: LeafletMouseEvent) => {
+        e.target.setIcon(defaultIcon);
+    };
+
+
 
     return (
         <div className='map'>
@@ -39,8 +51,16 @@ export const Map = () => {
 
                 {
                     ads.map(ad => (
-                        <Marker key={ad.id} position={[ad.lat, ad.lon]}>
-                            <Popup>
+                        <Marker
+                            key={ad.id}
+                            position={[ad.lat, ad.lon]}
+                            icon={defaultIcon}
+                            eventHandlers={{
+                                mouseover: handleMouseOver,
+                                mouseout: handleMouseOut,
+                            }}
+                        >
+                            <Popup className='custom-popup'>
                                <SingleAd id={ad.id}></SingleAd>
                             </Popup>
                         </Marker>
