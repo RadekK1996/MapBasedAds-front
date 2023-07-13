@@ -8,7 +8,8 @@ import './AddForm.css';
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);
-    const[id, setId] = useState('');
+    const [id, setId] = useState('');
+    const [error, setError] = useState<string | null>(null);
     const [form, setForm] = useState ({
         name: '',
         description: '',
@@ -39,7 +40,10 @@ export const AddForm = () => {
             const data = await res.json();
             setId(data.id);
 
-        } finally {
+        }  catch (error) {
+            setError('Podane współrzędne są nieprawidłowe. Spróbuj ponownie.')
+
+        }finally {
             setLoading(false);
         }
 
@@ -52,6 +56,11 @@ export const AddForm = () => {
             [key]: value,
         }));
     };
+
+    if(error) {
+        return <h2>{error}</h2>
+    }
+
 
 
     if(loading) {

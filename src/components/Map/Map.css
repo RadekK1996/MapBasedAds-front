@@ -6,3 +6,11 @@
 .leaflet-container {
     height: 100vh;
 }
+
+.custom-popup .leaflet-popup-content-wrapper {
+    max-width: 400px;
+    max-height: 300px;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+
