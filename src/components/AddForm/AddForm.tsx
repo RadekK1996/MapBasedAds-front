@@ -2,7 +2,9 @@ import React, {SyntheticEvent, useState} from "react";
 import {Btn} from "../common/Btn";
 import {geocode} from "../../utils/geocoding";
 
+
 import './AddForm.css';
+
 
 export const AddForm = () => {
     const [loading, setLoading] = useState(false);
@@ -22,7 +24,7 @@ export const AddForm = () => {
 
         try {
             const {lat, lon} = await geocode(form.address);
-            const res = await fetch(`http://localhost:3001/ad`, {
+            const res = await fetch(`http://localhost:3001/api/ad`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
