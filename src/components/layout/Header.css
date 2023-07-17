@@ -1,0 +1,28 @@
+header {
+    background: #6200EE;;
+    padding: 12px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+header h1, header a {
+    font-size: 20px;
+    font-weight: 200;
+    color: white;
+    text-decoration: none;
+
+}
+
+header h1:hover {
+    color: lightgray;
+}
+
+.search {
+    display: flex;
+}
+
+.search input {
+    width: 13em;
+    margin-right: 5px;
+}
